@@ -31,6 +31,9 @@ services:
       - "./acme.json:/letsencrypt/acme.json"
     networks:
       - web-proxy
+networks:
+  web-proxy:
+    external: true
 EOF
 
 cd /home/hosting/gateway && docker compose up -d
