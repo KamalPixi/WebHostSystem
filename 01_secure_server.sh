@@ -2,7 +2,7 @@
 # 01_secure_server.sh - Run as root
 
 # 0. Optional: Set this before running to auto-install root SSH key
-HOST_SSH_PUBKEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA5KSEjq7JlzkywLQE8EuCLLHkOYVQ5l9662UkMbgC6V kamalkhan@KamalKhan.local"
+# HOST_SSH_PUBKEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA5KSEjq7JlzkywLQE8EuCLLHkOYVQ5l9662UkMbgC6V kamalkhan@KamalKhan.local"
 
 # 1. Update & Install Essentials
 apt update && apt upgrade -y
