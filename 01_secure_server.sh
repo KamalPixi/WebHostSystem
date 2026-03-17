@@ -1,6 +1,9 @@
 #!/bin/bash
 # 01_secure_server.sh - Run as root
 
+# 0. Optional: Set this before running to auto-install root SSH key
+HOST_SSH_PUBKEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA5KSEjq7JlzkywLQE8EuCLLHkOYVQ5l9662UkMbgC6V kamalkhan@KamalKhan.local"
+
 # 1. Update & Install Essentials
 apt update && apt upgrade -y
 apt install -y ufw curl git xfsprogs openssh-server fail2ban unattended-upgrades
@@ -12,6 +15,15 @@ systemctl enable --now fail2ban
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+# Optional: Install root SSH key if provided
+if [ -n "$HOST_SSH_PUBKEY" ]; then
+  mkdir -p /root/.ssh
+  chmod 700 /root/.ssh
+  echo "$HOST_SSH_PUBKEY" > /root/.ssh/authorized_keys
+  chmod 600 /root/.ssh/authorized_keys
+fi
+
 systemctl restart ssh
 
 # 3. Setup Firewall
