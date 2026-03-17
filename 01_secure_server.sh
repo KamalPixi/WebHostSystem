@@ -45,8 +45,7 @@ sh get-docker.sh
 mkdir -p /etc/docker
 cat <<EOF > /etc/docker/daemon.json
 {
-  "storage-driver": "overlay2",
-  "storage-opts": ["overlay2.override_kernel_check=true"]
+  "storage-driver": "overlay2"
 }
 EOF
 systemctl restart docker
